@@ -1,4 +1,4 @@
-import fileinput, sys
+import fileinput
 
 octos = []
 flashing = []
