@@ -1,11 +1,15 @@
 # advent-of-code
-Personal repo for advent of code solutions
+https://adventofcode.com
+
+## Running
+--------
+Requires python3.x
 
 Find year you want to run
-`cd [year]`
+```cd [year]```
 
 Find day you want to run
-`cd [day]`
+```cd [day]```
 
 Each part runs as a standalone
-`python3 [day-part].py`
+```python3 [day-part].py```
