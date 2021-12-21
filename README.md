@@ -6,10 +6,16 @@ https://adventofcode.com
 Requires python3.x
 
 Find year you want to run
-```cd [year]```
+```bash
+  cd [year]
+```
 
 Find day you want to run
-```cd [day]```
+```bash
+  cd [day]
+```
 
 Each part runs as a standalone
-```python3 [day-part].py```
+```bash
+  python3 [day-part].py
+```
