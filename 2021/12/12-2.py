@@ -17,7 +17,7 @@ for edge in edges:
 			caves[cave].append(edge[1-i])
 			
 # stupid runtime cheese with map instead of list
-paths = {}
+paths = set()
 
 def find_path(node, visited, double, path):
 	v = dict(visited)
@@ -26,7 +26,7 @@ def find_path(node, visited, double, path):
 	if node == 'end':
 		if p not in paths:
 			print(len(paths))
-			paths[p] = 0
+			paths.add(p)
 		return
 	if str.islower(node):
 		if node in v:
