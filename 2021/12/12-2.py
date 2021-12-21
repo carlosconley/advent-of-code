@@ -15,7 +15,8 @@ for edge in edges:
 			caves[cave] = [edge[1-i]]
 		else:
 			caves[cave].append(edge[1-i])
-
+			
+# stupid runtime cheese with map instead of list
 paths = {}
 
 def find_path(node, visited, double, path):
