@@ -9,55 +9,49 @@ from math import log
 
 rules = {}
 counts = {}
+c_counts = {}
 start = str()
 
 for line in fileinput.input('14-input.txt'):
 	if fileinput.lineno() == 1:
 		start = line[:-1]
-		for char in line[:-1]:
-			counts[char] = 0
+
 	elif fileinput.lineno() > 2:
 		rule = line.split(' -> ')
-		rules[rule[0]] = {1:rule[1].strip()}
-		for rule in rules:
-			for char in rule:
-				counts[char] = 0
+		rules[rule[0]] = rule[1].strip()
 
-for char in start:
-	counts[char] += 1
-
-def find_depth(length):
-	if length < 2:
-		return 1
-	return log(length - 1, 2)
-
-def polymerize(pair, depth):
-	if depth == 0:
-		return ''
-	
-	poly_depth = min(max(rules[pair]), depth)
-	if poly_depth not in rules[pair]:
-		poly_depth = 1
-
-	poly = rules[pair][poly_depth]
-
-	for char in poly:
-		counts[char] += 1
-
-	current = pair[0] + poly + pair[1]
-	output = poly
-
-	for i in range(len(current) - 1):
-		if i < len(current) / 2
-		output += polymerize(current[i] + current[i+1], depth - poly_depth)
-	
-	if output != '':
-		rules[pair][depth] = output
-	return output
+for rule in rules:
+	counts[rule] = 0
 
 for i in range(len(start) - 1):
-	polymerize(start[i] + start[i+1], 2)
+	counts[start[i:i+2]] += 1
 
-print(rules)
-print(sum(counts.values()))
-print(max(counts.values()) - min(counts.values()))
+def freq(pairs):
+	new_pairs = dict(pairs)
+	for pair in pairs:
+		count = counts[pair]
+		new_pairs[pair] -= count
+		new_pairs[pair[0] + rules[pair]] += count
+		new_pairs[rules[pair] + pair[1]] += count
+
+	return new_pairs
+
+
+
+for i in range(40):
+	counts = freq(counts)
+
+for pair in counts:
+	for char in pair:
+		if char not in c_counts:
+			c_counts[char] = 0
+		c_counts[char] += counts[pair]
+
+c_counts[start[0]] += 1
+c_counts[start[-1]] += 1
+
+for char in c_counts:
+	c_counts[char] //= 2
+
+print(c_counts)
+print(max(c_counts.values()) - min(c_counts.values()))
